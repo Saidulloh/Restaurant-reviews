@@ -31,7 +31,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
         lst_of_stars = [review.star for review in reviews]
         if len(lst_of_stars) != 0:
             estimate = sum(lst_of_stars) / len(lst_of_stars)
-        return estimate
+            return estimate
 
     def get_review_count(self, obj):
         reviews = Review.objects.filter(restaurant=obj.id)
