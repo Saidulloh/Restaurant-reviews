@@ -1,6 +1,7 @@
 from django.db import models
 
 from apps.restaurants.models import Restaurant
+from apps.users.models import User
 
 
 class Review(models.Model):
@@ -14,9 +15,11 @@ class Review(models.Model):
         (4, 4),
         (5, 5),
     )
-    username = models.CharField(
-        max_length=256,
-        verbose_name='username'
+    review_owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='review_owner',
+        verbose_name='review_owner'
     )
     comment = models.TextField(
         verbose_name='comment'

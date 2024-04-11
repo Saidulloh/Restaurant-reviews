@@ -7,5 +7,5 @@ from apps.reviews.models import Review
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'username',
+        'review_owner',
     )
