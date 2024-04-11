@@ -1,6 +1,8 @@
 from django.db import models
 # from django.contrib.gis.db import models
 
+from apps.users.models import User
+
 
 class Restaurant(models.Model):
     """
@@ -19,6 +21,13 @@ class Restaurant(models.Model):
     description = models.TextField(
         verbose_name='description'
     )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='restaurant_owner',
+        verbose_name='restaurant_owner'
+    )
+
     def __str__(self) -> str:
         return f'{self.id} -- {self.title}'
     

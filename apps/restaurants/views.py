@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from apps.restaurants.models import Restaurant
 from apps.restaurants.serializers import RestaurantSerializer
@@ -7,6 +8,10 @@ from apps.restaurants.serializers import RestaurantSerializer
 class RestaurantApiViewSet(ModelViewSet):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)
 
     #код для отображения карты
 
