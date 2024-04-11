@@ -29,7 +29,8 @@ class RestaurantSerializer(serializers.ModelSerializer):
     def get_arithmetic_mean_estimate(self, obj):
         reviews = Review.objects.filter(restaurant=obj.id)
         lst_of_stars = [review.star for review in reviews]
-        estimate = sum(lst_of_stars) / len(lst_of_stars)
+        if len(lst_of_stars) != 0:
+            estimate = sum(lst_of_stars) / len(lst_of_stars)
         return estimate
 
     def get_review_count(self, obj):
